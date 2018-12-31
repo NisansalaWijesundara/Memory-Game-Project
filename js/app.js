@@ -8,9 +8,9 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-//const cardList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 
 let clickedCards = [];
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length,
@@ -30,7 +30,7 @@ function shuffle(array) {
 const cards = document.querySelector('.deck');
 cards.addEventListener('click', event => {
   const clicked = event.target;
-  if (event.target.tagName === 'LI' && clickedCards.length < 2) {
+  if (event.target.tagName === 'LI' && clickedCards.length < 2 && !clicked.classList.contains('match')) {
     cardClicked(clicked);
     openCards(clicked);
     if (clickedCards.length === 2) {
@@ -59,7 +59,7 @@ function checkForMatch(event) {
       cardClicked(clickedCards[0]);
       cardClicked(clickedCards[1]);
       clickedCards = [];
-    }, 50);
+    }, 1000);
   }
 }
 /*
