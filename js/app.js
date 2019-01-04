@@ -8,12 +8,28 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+const cardList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
+const cards = document.querySelector('.deck');
+const restart = document.querySelector('.restart');
+
+function generateCards(card) {
+  return `<li class="card"><i class="${card}"></i></li>`;
+}
+
+function startGame() {
+  let cardHtml = shuffle(cardList).map(function(card) {
+    return generateCards(card);
+  });
+  cards.innerHTML = cardHtml.join('');
+}
+
+startGame();
 
 let clickedCards = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length,
+  let currentIndex = array.length,
     temporaryValue, randomIndex;
 
   while (currentIndex !== 0) {
@@ -27,7 +43,21 @@ function shuffle(array) {
   return array;
 }
 
-const cards = document.querySelector('.deck');
+restart.addEventListener('click', reset);
+
+function resetCardDeck() {
+  let shuffleCards = Array.from(document.querySelectorAll('.deck li'));
+  let shuffledCard = shuffle(shuffleCards);
+  for (card of shuffledCard) {
+    card.className = 'card';
+    cards.appendChild(card);
+  }
+}
+
+function reset() {
+  resetCardDeck();
+}
+
 cards.addEventListener('click', event => {
   const clicked = event.target;
   if (event.target.tagName === 'LI' && clickedCards.length < 2 && !clicked.classList.contains('match')) {
@@ -36,7 +66,6 @@ cards.addEventListener('click', event => {
     if (clickedCards.length === 2) {
       checkForMatch(event);
     }
-
   }
 });
 
