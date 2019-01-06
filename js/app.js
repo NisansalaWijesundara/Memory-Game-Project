@@ -12,8 +12,11 @@ const cardList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa
 const cards = document.querySelector('.deck');
 const restart = document.querySelector('.restart');
 const counter = document.querySelector('.moves');
+
 let moves = 0;
 let clickedCards = [];
+
+startGame();
 
 function generateCards(card) {
   return `<li class="card"><i class="${card}"></i></li>`;
@@ -26,10 +29,41 @@ function startGame() {
   cards.innerHTML = cardHtml.join('');
 }
 
-startGame();
+cards.addEventListener('click', event => {
+  const clicked = event.target;
+  if (event.target.tagName === 'LI' && clickedCards.length < 2 && !clicked.classList.contains('match')) {
+    cardClicked(clicked);
+    openCards(clicked);
+    if (clickedCards.length === 2) {
+      checkForMatch(event);
+      move();
+      rating();
+    }
+  }
+});
 
+function checkForMatch(event) {
+  if (clickedCards[0].firstElementChild.className === clickedCards[1].firstElementChild.className) {
+    clickedCards[0].classList.toggle('match');
+    clickedCards[1].classList.toggle('match');
+    clickedCards = [];
+  } else {
+    setTimeout(() => {
+      cardClicked(clickedCards[0]);
+      cardClicked(clickedCards[1]);
+      clickedCards = [];
+    }, 1000);
+  }
+}
 
+function cardClicked(event) {
+  event.classList.toggle('open');
+  event.classList.toggle('show');
+}
 
+function openCards(event) {
+  clickedCards.push(event);
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -43,7 +77,6 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 
@@ -61,51 +94,46 @@ function resetCardDeck() {
 function reset() {
   resetCardDeck();
   resetMoves();
+  resetRating();
 }
 
 function move() {
   moves++;
   counter.innerHTML = moves;
+
 }
 
-function resetMoves(){
-  moves = 0 ;
+function resetMoves() {
+  moves = 0;
   counter.innerHTML = moves;
 }
-cards.addEventListener('click', event => {
-  const clicked = event.target;
-  if (event.target.tagName === 'LI' && clickedCards.length < 2 && !clicked.classList.contains('match')) {
-    cardClicked(clicked);
-    openCards(clicked);
-    if (clickedCards.length === 2) {
-checkForMatch(event);
-move();
+
+const starRate = Array.from(document.querySelectorAll('.stars li'));
+
+function rating() {
+
+  if (moves > 8 && moves < 15) {
+    for (star of starRate) {
+      star.style.visibility = "visible";
+    }
+  } else if (moves > 16 && moves < 18) {
+    for (star of starRate) {
+      star.style.visibility = "collapse";
+      break;
+    }
+  } else if (moves > 19) {
+    for (star of starRate) {
+      starRate[2].style.visibility = "collapse";
     }
   }
-});
-
-function cardClicked(event) {
-  event.classList.toggle('open');
-  event.classList.toggle('show');
 }
 
-function openCards(event) {
-  clickedCards.push(event);
-}
-
-function checkForMatch(event) {
-  if (clickedCards[0].firstElementChild.className === clickedCards[1].firstElementChild.className) {
-    clickedCards[0].classList.toggle('match');
-    clickedCards[1].classList.toggle('match');
-    clickedCards = [];
-  } else {
-    setTimeout(() => {
-      cardClicked(clickedCards[0]);
-      cardClicked(clickedCards[1]);
-      clickedCards = [];
-    }, 1000);
+function resetRating() {
+  for (star of starRate) {
+    star.style.visibility = "visible";
   }
 }
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
