@@ -12,9 +12,12 @@ const cardList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa
 const cards = document.querySelector('.deck');
 const restart = document.querySelector('.restart');
 const counter = document.querySelector('.moves');
+const timer = document.querySelector('.timer');
 
 let moves = 0;
 let clickedCards = [];
+let matched = 0;
+let clock;
 
 startGame();
 
@@ -47,6 +50,10 @@ function checkForMatch(event) {
     clickedCards[0].classList.toggle('match');
     clickedCards[1].classList.toggle('match');
     clickedCards = [];
+    matched++;
+    if (matched === 8) {
+      clearInterval(timerId);
+    }
   } else {
     setTimeout(() => {
       cardClicked(clickedCards[0]);
@@ -95,12 +102,15 @@ function reset() {
   resetCardDeck();
   resetMoves();
   resetRating();
+  resetTime();
 }
 
 function move() {
   moves++;
   counter.innerHTML = moves;
-
+  if (moves === 1) {
+    setTime();
+  }
 }
 
 function resetMoves() {
@@ -132,6 +142,24 @@ function resetRating() {
   for (star of starRate) {
     star.style.visibility = "visible";
   }
+}
+
+function setTime() {
+  let minutes = 0;
+  let seconds = 0;
+  clock = setInterval(() => {
+    timer.innerHTML = `mins ${minutes} secs ${seconds}`;
+    seconds++;
+    if (seconds === 60) {
+      minutes++;
+      seconds = 0;
+    }
+  }, 1000);
+}
+
+function resetTime() {
+  timer.innerHTML = "mins 0 secs 0";
+  clearInterval(clock);
 }
 
 /*
