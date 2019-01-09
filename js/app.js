@@ -52,7 +52,8 @@ function checkForMatch(event) {
     clickedCards = [];
     matched++;
     if (matched === 8) {
-      clearInterval(timerId);
+      clearInterval(clock);
+      gameScore();
     }
   } else {
     setTimeout(() => {
@@ -125,6 +126,7 @@ function rating() {
   if (moves > 8 && moves < 15) {
     for (star of starRate) {
       star.style.visibility = "visible";
+
     }
   } else if (moves > 16 && moves < 18) {
     for (star of starRate) {
@@ -134,6 +136,7 @@ function rating() {
   } else if (moves > 19) {
     for (star of starRate) {
       starRate[2].style.visibility = "collapse";
+
     }
   }
 }
@@ -144,9 +147,10 @@ function resetRating() {
   }
 }
 
+let minutes = 0;
+let seconds = 0;
+
 function setTime() {
-  let minutes = 0;
-  let seconds = 0;
   clock = setInterval(() => {
     timer.innerHTML = `mins ${minutes} secs ${seconds}`;
     seconds++;
@@ -160,6 +164,50 @@ function setTime() {
 function resetTime() {
   timer.innerHTML = "mins 0 secs 0";
   clearInterval(clock);
+}
+
+const congrat_modal = document.querySelector('.congratulation_modal');
+const modal_close = document.getElementById('close');
+const game_play_again = document.getElementById('game_play');
+
+function gameScore() {
+  congrat_modal.style.display = "block";
+  const finalTime = document.querySelector('.time');
+  const totalMoves = document.querySelector('.final_moves');
+  const totalRate = document.querySelector('.final_rate');
+  const star_rate = getFinalRate();
+
+  totalRate.innerHTML = `You got ${star_rate} stars and`
+  totalMoves.innerHTML = `You made ${moves} moves`;
+  finalTime.innerHTML = ` in ${minutes} minutes and ${seconds} seconds.`;
+
+
+  close();
+  playAgain();
+}
+
+let star_count = 0;
+
+function getFinalRate() {
+  for (star of starRate) {
+    if (star.style.display !== "none") {
+      star_count++;
+    }
+    return star_count;
+  }
+}
+
+function close() {
+  modal_close.addEventListener("click", event => {
+    congrat_modal.style.display = "none";
+  });
+}
+
+function playAgain() {
+  game_play_again.addEventListener("click", event => {
+    congrat_modal.style.display = "none";
+    reset();
+  });
 }
 
 /*
