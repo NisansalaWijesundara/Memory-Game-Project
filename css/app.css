@@ -11,10 +11,10 @@ html, body {
 	padding: 0;
 }
 body {
-	background: #ffffff url('../img/geometry2.png');
+	background: #fff url('../img/geometry2.png');
 	/* Background pattern from Subtle Patterns */
 	font-family: 'Coda', cursive;
-  font-size: 20px;
+	font-size: 20px;
 }
 .container {
 	display: flex;
@@ -48,7 +48,7 @@ h1 {
 	width: 125px;
 	background: #2e3d49;
 	font-size: 0;
-	color: #ffffff;
+	color: #fff;
 	border-radius: 8px;
 	cursor: pointer;
 	display: flex;
@@ -68,20 +68,19 @@ h1 {
 	cursor: default;
 	background: #02ccba;
 	font-size: 33px;
-  animation: zoominoutmatchedcards 0.75s forwards;
+	animation: zoominoutmatchedcards 0.75s forwards;
 }
 @keyframes zoominoutmatchedcards {
-    0% {
-        transform: scale(1,1);
-    }
-    50% {
-        transform: scale(1.2,1.2);
-    }
-    100% {
-        transform: scale(1,1);
-    }
+	0% {
+		transform: scale(1, 1);
+	}
+	50% {
+		transform: scale(1.2, 1.2);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
 }
-
 /*
  * Styles for the Score Panel
  */
@@ -98,8 +97,8 @@ h1 {
 	padding: 0;
 	display: inline-block;
 	margin: 0 5px 0 0;
-  color: #ffff00;
-  font-size: 25px;
+	color: #ffff00;
+	font-size: 25px;
 }
 .score-panel .stars li {
 	list-style: none;
@@ -108,14 +107,18 @@ h1 {
 .score-panel .restart {
 	float: right;
 	cursor: pointer;
-  color: #7cfc00;
+	color: #7cfc00;
 }
+/*
+ * Styles for the Congratulation modal
+ */
+
 .congratulation_modal {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	display: none;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .congrat_body {
 	position: relative;
@@ -123,13 +126,13 @@ h1 {
 	height: 350px;
 	top: 50%;
 	left: 50%;
-  transform: translate(-40%, -60%);
+	transform: translate(-45%, -60%);
 	color: #fff;
 	background-color: #000;
-  border-radius: 10px;
+	border-radius: 10px;
 }
 .heading {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .congrat_heading {
 	display: flex;
@@ -139,7 +142,7 @@ h1 {
 }
 #close {
 	font-weight: bold;
-  background-color:#fff;
+	background-color: #fff;
 }
 .congrat_content {
 	display: flex;
@@ -149,7 +152,7 @@ h1 {
 .final_rate {
 	display: inline-flex;
 	list-style: none;
-  color: #ffff00;
+	color: #ffff00;
 }
 .replay {
 	display: flex;
@@ -159,6 +162,6 @@ h1 {
 button {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	font-size: 20px;
-  border-radius: 8px;
-  background-color: #fff;
+	border-radius: 8px;
+	background-color: #fff;
 }

@@ -43,7 +43,9 @@ function flipCards() {
 		}
 	});
 }
-
+/**
+ * @description Check for match cards with identical face.
+ */
 function checkForMatch(event) {
 	if (clickedCards[0].firstElementChild.className === clickedCards[1].firstElementChild.className) {
 		clickedCards[0].classList.toggle('match');
@@ -53,8 +55,6 @@ function checkForMatch(event) {
 		win();
 	} else {
 		setTimeout(() => {
-      clickedCards[0].classList.toggle('unmatch');
-      clickedCards[1].classList.toggle('unmatch');
 			clickCards(clickedCards[0]);
 			clickCards(clickedCards[1]);
 			clickedCards = [];
@@ -112,7 +112,9 @@ function resetMoves() {
 	moves = 0;
 	counter.innerHTML = `${moves} Moves`;
 }
-
+/**
+ * @description Set the star rating based on the user moves.
+ */
 function rating() {
 	if (moves > 8 && moves < 15) {
 		for (star of starRate) {
@@ -135,7 +137,9 @@ function resetRating() {
 		star.style.visibility = "visible";
 	}
 }
-
+/**
+ * @description Start timer.
+ */
 function setTime() {
 	clock = setInterval(() => {
 		timer.innerHTML = `${minutes} mins ${seconds} secs `;
@@ -155,12 +159,15 @@ function resetTime() {
 }
 
 function reset() {
+	matchedCards = 0;
 	resetCardDeck();
 	resetMoves();
 	resetRating();
 	resetTime();
 }
-
+/**
+ * @description Display final moves,star rating & time of the game.
+ */
 function gameScore() {
 	congrat_modal.style.display = "block";
 	const finalTime = document.querySelector('.time');
@@ -171,11 +178,11 @@ function gameScore() {
 	totalRate.innerHTML = starRating;
 	totalMoves.innerHTML = `You made ${moves} moves`;
 	finalTime.innerHTML = `in ${totalTime}`;
-	modal_close.addEventListener("click", resetScore);
+	modal_close.addEventListener("click", resetGameScore);
 	game_play_again.addEventListener("click", gamePlayAgain);
 }
 
-function resetScore() {
+function resetGameScore() {
 	matchedCards = 0;
 	congrat_modal.style.display = "none";
 }
@@ -183,5 +190,5 @@ function resetScore() {
 function gamePlayAgain() {
 	matchedCards = 0;
 	reset();
-	resetScore();
+	resetGameScore();
 }
