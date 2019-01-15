@@ -1,10 +1,9 @@
 # Memory-Game-Project
-
+  ![alt text](memory-game/img/matching_game.png)
 ## How to play
   - Download or clone the repository on your machine.
   - Extract the .zip file.
   - Open index.html in your browser.
-  - OR follow the [link] (file:///G:/Android/MemoryGame/memory-game/index.html).
 
 ## Rules and Regulations
   - You have to match cards with identical face.
