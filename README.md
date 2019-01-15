@@ -1,5 +1,5 @@
 # Memory-Game-Project
-  ![alt text](memory-game/img/matching_game.png)
+  ![matching game](https://github.com/NisansalaWijesundara/Memory-Game-Project/blob/master/img/matching_game.png)
 ## How to play
   - Download or clone the repository on your machine.
   - Extract the .zip file.
