@@ -12,7 +12,7 @@ let moves = 0;
 let clickedCards = [];
 let matchedCards = 0;
 let clock;
-let cardpairs = 8;
+let cardPairs = 8;
 let minutes = 0;
 let seconds = 0;
 startGame();
@@ -53,6 +53,8 @@ function checkForMatch(event) {
 		win();
 	} else {
 		setTimeout(() => {
+      clickedCards[0].classList.toggle('unmatch');
+      clickedCards[1].classList.toggle('unmatch');
 			clickCards(clickedCards[0]);
 			clickCards(clickedCards[1]);
 			clickedCards = [];
@@ -61,7 +63,7 @@ function checkForMatch(event) {
 }
 
 function win() {
-	if (matchedCards === cardpairs) {
+	if (matchedCards === cardPairs) {
 		clearInterval(clock);
 		gameScore();
 	}
@@ -166,7 +168,7 @@ function gameScore() {
 	const totalRate = document.querySelector('.final_rate');
 	let starRating = document.querySelector(".stars").innerHTML;
 	let totalTime = timer.innerHTML;
-	totalRate.innerHTML = `You got  ${starRating}  stars and `;
+	totalRate.innerHTML = starRating;
 	totalMoves.innerHTML = `You made ${moves} moves`;
 	finalTime.innerHTML = `in ${totalTime}`;
 	modal_close.addEventListener("click", resetScore);
