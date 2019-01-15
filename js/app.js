@@ -92,6 +92,7 @@ function shuffle(array) {
 }
 
 function resetCardDeck() {
+	clickedCards = [];
 	let shuffleCards = Array.from(document.querySelectorAll('.deck li'));
 	let shuffledCard = shuffle(shuffleCards);
 	for (card of shuffledCard) {
@@ -159,7 +160,6 @@ function resetTime() {
 }
 
 function reset() {
-	matchedCards = 0;
 	resetCardDeck();
 	resetMoves();
 	resetRating();
