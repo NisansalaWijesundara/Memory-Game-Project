@@ -160,6 +160,7 @@ function resetTime() {
 
 function reset() {
 	clickedCards = [];
+  matchedCards = 0;
 	resetCardDeck();
 	resetMoves();
 	resetRating();
