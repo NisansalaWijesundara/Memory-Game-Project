@@ -32,7 +32,7 @@ function startGame() {
 function flipCards() {
 	cards.addEventListener('click', event => {
 		const clicked = event.target;
-		if (event.target.tagName === 'LI' && clickedCards.length < 2 && !clicked.classList.contains('match')) {
+		if (event.target.tagName === 'LI' && clickedCards.length < 2 && !clicked.classList.contains('match') && !clickedCards.includes(clicked)) {
 			clickCards(clicked);
 			openCards(clicked);
 			if (clickedCards.length === 2) {
@@ -160,7 +160,7 @@ function resetTime() {
 
 function reset() {
 	clickedCards = [];
-  matchedCards = 0;
+	matchedCards = 0;
 	resetCardDeck();
 	resetMoves();
 	resetRating();
